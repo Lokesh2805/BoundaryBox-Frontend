@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Hides scrollbar in Chrome, Safari, etc. */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Hides scrollbar in Internet Explorer and Edge */
+  scrollbar-width: none;     /* Hides scrollbar in Firefox */
+}
+
+.custom-gradient {
+  background: radial-gradient(circle at 30% 30%, #a87c4c 10%, transparent 40%),
+              radial-gradient(circle at 70% 50%, #3a2d26 20%, transparent 50%),
+              radial-gradient(circle at 50% 80%, #b3906b 10%, transparent 40%),
+              linear-gradient(135deg, #5b4434, #1f1a17);
+  background-blend-mode: screen;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
