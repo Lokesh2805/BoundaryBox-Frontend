@@ -29,7 +29,7 @@ export default function Navbar() {
               FANTASY MATCHES
             </a>
             <a
-              href="#"
+              href="/ranking"
               className="text-white hover:text-blue-400 transition font-medium"
             >
               RANKING

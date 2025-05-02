@@ -1,0 +1,67 @@
+[{
+    "_id": {
+      "$oid": "6809139043fb77ae4ce58ffb"
+    },
+    "team1": "Mumbai Indians",
+    "ranking_team1": {
+      "player_lst": [
+        "Suryakumar Yadav",
+        "Tilak Varma",
+        "Naman Dhir",
+        "Ryan Rickelton",
+        "Hardik Pandya",
+        "Mitchell Santner",
+        "Will Jacks",
+        "Jasprit Bumrah",
+        "Trent Boult",
+        "Deepak Chahar",
+        "Vignesh Puthur"
+      ],
+      "rank_lst": [
+        5,
+        5,
+        5,
+        2,
+        5,
+        2,
+        3,
+        5,
+        1,
+        1,
+        5
+      ]
+    },
+    "team2": "Sunrisers Hyderabad",
+    "ranking_team2": {
+      "player_lst": [
+        "Heinrich Klaasen",
+        "Travis Head",
+        "Abhishek Sharma",
+        "Aniket Verma",
+        "Ishan Kishan",
+        "Nitish Kumar Reddy",
+        "Harshal Patel",
+        "Jaydev Unadkat",
+        "Zeeshan Ansari",
+        "Eshan Malinga",
+        "Pat Cummins"
+      ],
+      "rank_lst": [
+        5,
+        5,
+        5,
+        5,
+        3,
+        2,
+        5,
+        1,
+        1,
+        5,
+        3
+      ]
+    },
+    "link": "https://www.cricket.com/live-score/sunrisers-hyderabad-vs-mumbai-indians-match-41-indian-premier-league-2025-257255/criclytics",
+    "created_at": {
+      "$date": "2025-04-23T21:51:36.991Z"
+    }
+  }]

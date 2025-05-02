@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
-
+import ScorecardPage from './pages/ScoreboardPage';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
+import RankingDisplay from './pages/RankingPage';
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<AboutPage/>} />
+        <Route path="/scoreboard/:slug" element={<ScorecardPage />} />
+        <Route path='/ranking' element={<RankingDisplay/>} />
       </Routes>
     </Router>
   );

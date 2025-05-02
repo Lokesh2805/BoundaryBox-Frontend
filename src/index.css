@@ -1,6 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1, h2, .score {
+  font-family: 'League Spartan', sans-serif;
+}
+
+/* Body Text */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Hides scrollbar in Chrome, Safari, etc. */
 }

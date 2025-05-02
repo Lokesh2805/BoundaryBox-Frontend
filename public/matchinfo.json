@@ -1,0 +1,116 @@
+[{
+    "_id": {
+      "$oid": "66c051c04d8f30494034f628"
+    },
+    "matchName": "BLB vs MW 4th Match, Maharaja T20 2024",
+    "teamName": {
+      "team1": "Bengaluru Blasters",
+      "team2": "Mysore Warriors"
+    },
+    "schedule": "Aug 16, 2024, 7:00:00 PM",
+    "location": "M. Chinnaswamy Stadium, Bengaluru",
+    "toss": "BLB won the toss and chose to bowl",
+    "headToHead": {
+      "team1": "4",
+      "team2": "3"
+    },
+    "wetherCondition": {
+      "temp": "24˚C",
+      "sky": "Cloudy",
+      "humidity": "84% (Humidity)",
+      "rain": "90 % Chance"
+    },
+    "Umpire": {
+      "On-field": "Vikas Lund, DL Deepak",
+      "Third": "Belur Ravi",
+      "Referee": "Balachandra Akhil"
+    },
+    "prefBall": {
+      "Pace": "68%",
+      "Spin": "32%"
+    },
+    "venueStats": {},
+    "teamComparison": {
+      "matchPlayed": {
+        "team1": "10",
+        "team2": "10"
+      },
+      "win": {
+        "team1": "30%",
+        "team2": "60%"
+      },
+      "scoreDetails": {
+        "avgScore": {
+          "team1": "149",
+          "team2": "181"
+        },
+        "highestScore": {
+          "team1": "212",
+          "team2": "248"
+        },
+        "lowestScore": {
+          "team1": "81",
+          "team2": "141"
+        }
+      }
+    },
+    "matchUrl": "https://crex.live/scoreboard/QKJ/1MF/4th-Match/34/38/blb-vs-mw-4th-match-maharaja-t20-league-2024/info",
+    "status": 0,
+    "result": "Bengaluru Blasters won by 4 wickets 🏆",
+    "updatedAt": {
+      "$date": "2024-08-17T13:01:12.775Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66c0600390347c6fb3357e66"
+    },
+    "matchName": "BAR vs BOL 26th Match, Italy-Rome T10 2024",
+    "teamName": {
+      "team1": "Bologna",
+      "team2": "Baracca Prato"
+    },
+    "schedule": "Aug 17, 2024, 12:30:00 PM",
+    "location": "Roma Cricket Ground Spinaceto",
+    "toss": "BOL won the toss and chose to bowl",
+    "headToHead": {},
+    "wetherCondition": {
+      "temp": "30.5˚C",
+      "sky": "Sunny",
+      "humidity": "62% (Humidity)",
+      "rain": "40 % Chance"
+    },
+    "Umpire": {},
+    "prefBall": {},
+    "venueStats": {},
+    "teamComparison": {
+      "matchPlayed": {
+        "team1": "5",
+        "team2": "8"
+      },
+      "win": {
+        "team1": "20%",
+        "team2": "25%"
+      },
+      "scoreDetails": {
+        "avgScore": {
+          "team1": "113",
+          "team2": "97"
+        },
+        "highestScore": {
+          "team1": "136",
+          "team2": "139"
+        },
+        "lowestScore": {
+          "team1": "78",
+          "team2": "48"
+        }
+      }
+    },
+    "matchUrl": "https://crex.live/scoreboard/QPL/1NH/26th-Match/XE/XF/bar-vs-bol-26th-match-european-italyrome-t10-2024/info",
+    "status": 0,
+    "result": "Pending",
+    "updatedAt": {
+      "$date": "2024-08-17T14:02:03.970Z"
+    }
+  }]

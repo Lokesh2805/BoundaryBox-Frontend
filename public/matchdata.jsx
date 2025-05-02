@@ -8,8 +8,8 @@ export const matchData={
       "Live"
     ],
     "link": [
-      "https://crex.com/scoreboard/U8C/1SS/8th-Match/15D/15E/ekt-vs-mit-8th-match-ecs-france-t10-2025/scorecard",
-      "https://crex.com/scoreboard/U94/1SK/12th-Match/DG/DH/fuj-vs-sha-12th-match-emirates-d50-tournament-2025/live",
+      "https://crex.com/scoreboard/U8C/1SS/8th-Match/15D/15E/blb-vs-mw-8th-match-ecs-france-t10-2025/scorecard",
+      "https://crex.com/scoreboard/U94/1SK/12th-Match/DG/DH/bar-vs-bol-12th-match-emirates-d50-tournament-2025/live",
       "https://crex.com/scoreboard/U95/1SK/13th-Match/DC/DD/abd-vs-emb-13th-match-emirates-d50-tournament-2025/live",
       "https://crex.com/scoreboard/U8D/1SS/9th-Match/15G/15H/puc-vs-pz-9th-match-ecs-france-t10-2025/scorecard",
       "https://crex.com/scoreboard/T3X/1PD/40th-Match/H/KC/dc-vs-lsg-40th-match-indian-premier-league-2025/live",

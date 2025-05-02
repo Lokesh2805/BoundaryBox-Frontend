@@ -76,10 +76,10 @@ export default function MatchSchedule() {
           return (
             <a
               key={index}
-              href='#'
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative group block bg-gradient-to-tr from-orange-100 to-blue-100 p-0 rounded-xl overflow-hidden shadow-lg transition hover:shadow-2xl border border-gray-200"
+              className="relative group block bg-gradient-to-tr from-orange-100 to-blue-100 p-0 rounded-xl overflow-hidden shadow-lg border border-gray-200 transition duration-300 ease-in-out hover:border-blue-500 hover:shadow-[0_0_12px_3px_rgba(59,130,246,0.4)]"
             >
               <div className="p-4 bg-opacity-90">
                 <div className="text-center text-lg font-extrabold text-gray-900 uppercase tracking-wide">
@@ -89,9 +89,16 @@ export default function MatchSchedule() {
                   {time}
                 </div>
                 <div className="mt-3 text-center">
-                  <span className="inline-block text-xs bg-white text-blue-700 font-medium px-3 py-1 rounded-full border border-blue-300">
+                  <a
+                    href={`/scoreboard/${teams
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-xs bg-white text-blue-700 font-medium px-3 py-1 rounded-full border border-blue-300 transition duration-300 ease-in-out hover:border-blue-500 hover:shadow-[0_0_8px_2px_rgba(59,130,246,0.5)]"
+                  >
                     View Scorecard
-                  </span>
+                  </a>
                 </div>
               </div>
             </a>
