@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
-import { matchData } from "../../public/matchdata";
+import React, { useRef, useState, useEffect } from "react";
+// import { matchData } from "../../public/matchdata";
+import { fetchMatchData } from "../services/getMatchSchedule";
 import { ChevronLeft, ChevronRight } from "lucide-react"; // You can install lucide-react or use any icon library
 
 const extractTeamNames = (url) => {
@@ -14,11 +15,27 @@ const extractTeamNames = (url) => {
 };
 
 export default function MatchSchedule() {
-  const dates = Object.keys(matchData);
-  const [activeDate, setActiveDate] = useState(dates[0]);
+  const [matchData, setMatchData] = useState(null);
+  const [activeDate, setActiveDate] = useState(null);
 
   const carouselRef = useRef(null);
+  useEffect(() => {
+    fetchMatchData()
+      .then((data) => {
+        // console.log("Fetched data:", data);
+        setMatchData(data);
+        const dates = Object.keys(data);
+        setActiveDate(dates[0]);
+      })
+      .catch((err) => {
+        console.error("Error fetching match data:", err);
+      });
+  }, []);
 
+  if (!matchData || !activeDate || !matchData[activeDate]) {
+    return <div className="p-6 text-center text-gray-500">Loading matches...</div>;
+  }
+  const dates = Object.keys(matchData);
   const scrollCarousel = (direction) => {
     const scrollAmount = 200;
     if (carouselRef.current) {

@@ -23,7 +23,7 @@ export default function Navbar() {
               ABOUT US
             </a>
             <a
-              href="#"
+              href="/fantasyMatches"
               className="text-white hover:text-blue-400 transition font-medium"
             >
               FANTASY MATCHES
