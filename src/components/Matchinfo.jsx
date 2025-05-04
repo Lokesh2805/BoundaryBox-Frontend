@@ -2,16 +2,20 @@ import React from "react";
 import { FaMapMarkerAlt, FaCloudSun, FaUserTie, FaFlag, FaClock, FaUserCheck } from "react-icons/fa";
 
 const MatchInfo = ({ matchInfo }) => {
-  if (!matchInfo) return <p className="text-center text-gray-600">Match information is loading...</p>;
 
+
+  if (!matchInfo || !matchInfo["Data Scraped"]) return <p className="text-center text-gray-600">Match information is loading...</p>;
+
+  // Destructure the "Data Scraped" field from matchInfo
   const {
+    matchName,
     teamName = {},
     schedule,
-    location,
     toss,
     wetherCondition = {},
     Umpire = {},
-  } = matchInfo;
+    location = "Not Available", // Assuming location is not provided in the data, using a placeholder
+  } = matchInfo["Data Scraped"];
 
   const displayOrNA = (value) => value || <span className="text-gray-400 italic">Not Available</span>;
 

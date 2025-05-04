@@ -1,70 +1,65 @@
-// components/ScoreboardPage.jsx
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Matchinfo from "../components/Matchinfo";
 import Scorecard from "../components/Scorecard";
 import { useMatchInfo } from "../context/MatchInfoContext";
+import { fetchLiveMatchInfo, fetchLiveMatchScorecard } from "../services/apis"; // ⬅️ Make sure this is imported
+import CricketLoader from "../components/Loader/CricketLoader";
 
 export default function ScoreboardPage() {
   const { slug } = useParams(); // e.g. blb-vs-mw
+  const [activeTab, setActiveTab] = useState("info");
   const [scorecardData, setScorecardData] = useState(null);
-  const [activeTab, setActiveTab] = useState("info"); // 'info' | 'scorecard'
-  //const [matchInfo, setMatchInfo] = useState(null);
-  const { matchInfo } = useMatchInfo();
-  console.log(matchInfo);
+  const [scorecardError, setScorecardError] = useState(null);
 
-  // Fetch match info (always on mount)
-  useEffect(() => {
-    const fetchMatchInfo = async () => {
-      try {
-        const res = await fetch("/matchinfo.json");
-        const data = await res.json();
-        const matched = data.find((match) =>
-          match.matchUrl.includes(slug.toLowerCase())
-        );
-        setMatchInfo(matched || null);
-      } catch (err) {
-        console.error("Error loading match info:", err);
-      }
-    };
-
-    fetchMatchInfo();
-  }, [slug]);
-
-  // Fetch scorecard only when user clicks Scorecard tab
-  useEffect(() => {
-    if (activeTab === "scorecard" && !scorecardData) {
-      const fetchScorecard = async () => {
-        try {
-          const res = await fetch("/matchScorecard.json");
-          const data = await res.json();
-          const matched = data.find((match) =>
-            match.matchUrl.includes(slug.toLowerCase())
-          );
-
-          if (matched) {
-            setScorecardData(matched);
-          } else {
-            console.warn(`No scorecard found for slug: ${slug}`);
-          }
-        } catch (err) {
-          console.error("Error fetching scorecard:", err);
-        }
-      };
-
-      fetchScorecard();
-    }
-  }, [activeTab, slug, scorecardData]);
+ 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const matchUrl = queryParams.get("link");
+  const { matchInfo, setMatchInfo } = useMatchInfo();
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
+  
+useEffect(() => {
+  const getMatchInfo = async () => {
+    if (!matchInfo && matchUrl) {
+      const info = await fetchLiveMatchInfo(matchUrl, "match info");
+      setMatchInfo(info); // from context
+    }
+  };
+
+  getMatchInfo();
+}, [matchUrl]);
+
+  useEffect(() => {
+    const getScorecard = async () => {
+      console.log(matchInfo["Data Scraped"].matchUrl)
+      if (matchInfo["Data Scraped"].matchUrl) {
+        const result = await fetchLiveMatchScorecard(matchInfo["Data Scraped"].matchUrl);
+        if (result.success) {
+          setScorecardData(result.data);
+          setScorecardError(null);
+        } else {
+          setScorecardData(null);
+          setScorecardError(result.message || "Something went wrong");
+        }
+      }
+    };
+
+    if (activeTab === "scorecard" && !scorecardData && !scorecardError) {
+      getScorecard();
+    }
+  }, [activeTab, matchInfo]);
 
   if (!matchInfo)
-    return <div className="text-center mt-10">Loading match data...</div>;
-
-  const { teamName, schedule, matchName, result } = matchInfo;
-
+    return <div className="flex flex-col items-center justify-center mt-20">
+  <CricketLoader/>
+  <span className="text-lg text-blue-700 font-semibold">
+        Loading Match Information...
+      </span></div>;
+console.log(scorecardData, scorecardError);
   return (
     <div className="min-h-screen bg-[#0f1f2d] text-white">
       {/* Tabs */}
@@ -95,12 +90,24 @@ export default function ScoreboardPage() {
 
       {/* Content Area */}
       <div className="bg-white text-black mt-0 p-6 rounded-b-xl shadow-md">
-        {activeTab === "info" && (
-         <Matchinfo matchInfo={matchInfo}/>
-        )}
+        {activeTab === "info" && <Matchinfo matchInfo={matchInfo} />}
 
         {activeTab === "scorecard" && (
-          <Scorecard scorecardData={scorecardData} />
+          <>
+            {scorecardError ? (
+              <div className="text-center text-red-600 font-semibold">
+                {scorecardError}
+              </div>
+            ) : scorecardData ? (
+              <Scorecard scorecard={scorecardData} />
+            ) : (
+              <div className="flex flex-col items-center justify-center"><CricketLoader/>
+                     <span className="text-lg text-blue-700 font-semibold">
+                     Loading Scorecard...
+                   </span>
+                     </div>
+            )}
+          </>
         )}
       </div>
     </div>

@@ -6,7 +6,7 @@ export default function Navbar() {
   const [isSignedIn, setIsSignedIn] = useState(false); // Change to false to test unauth view
 
   return (
-    <nav className="bg-black bg-opacity-80 backdrop-blur-md fixed w-full z-50 shadow-md font-josefin">
+    <nav className="bg-black bg-opacity-80 backdrop-blur-md fixed w-full z-20 shadow-md font-josefin">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}

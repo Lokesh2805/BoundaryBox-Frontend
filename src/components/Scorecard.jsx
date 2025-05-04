@@ -2,14 +2,15 @@ import React from "react";
 import { BiSolidCricketBall } from "react-icons/bi";
 import { GiCricketBat } from "react-icons/gi";
 
-function Scorecard({ scorecardData }) {
+function Scorecard({ scorecard }) {
+  console.log(scorecard);
   const excludedKeys = ["matchUrl", "status", "updatedAt", "_id"];
 
   return (
     <div className="max-w-7xl mx-auto p-4">
-      {scorecardData ? (
+      {scorecard["Data Scraped"] ? (
         <div className="space-y-10">
-          {Object.entries(scorecardData)
+          {Object.entries(scorecard["Data Scraped"])
             .filter(([key]) => !excludedKeys.includes(key))
             .map(([teamName, teamData], i) => (
               <div

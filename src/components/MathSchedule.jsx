@@ -45,18 +45,12 @@ export default function MatchSchedule() {
   };
 
   const navigate = useNavigate();
-  const { setMatchInfo } = useMatchInfo();
+  
 
-  const handleScoreboardClick = async (link, teamsSlug) => {
-    try {
-      const info = await fetchLiveMatchInfo(link, "match info");
-      setMatchInfo(info);
-      navigate(`/scoreboard/${teamsSlug}`);
-    } catch (error) {
-      console.error("Failed to fetch live match info:", error);
-    }
+  const handleScoreboardClick = (link, teamsSlug) => {
+    navigate(`/scoreboard/${teamsSlug}?link=${encodeURIComponent(link)}`);
   };
-
+  
   if (!matchData || !activeDate) {
     return (
       <SpinningBallLoader/>
@@ -107,6 +101,7 @@ export default function MatchSchedule() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {matchData[activeDate].time.map((time, index) => {
           const link = matchData[activeDate].link[index];
+        
           const teams = extractTeamNames(link);
 
           return (

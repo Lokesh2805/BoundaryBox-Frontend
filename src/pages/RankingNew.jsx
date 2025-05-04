@@ -48,7 +48,11 @@ export default function RankingPage() {
       </div>
 
       {loading ? (
-        <CricketLoader/>
+        <div className="flex flex-col items-center justify-center "><CricketLoader/>
+        <span className="text-lg text-blue-700 font-semibold">
+        Loading Fantasy Matches...
+      </span>
+        </div>
       ) : matches.length === 0 ? (
         <div className="text-center text-gray-600">No upcoming matches available.</div>
       ) : (
