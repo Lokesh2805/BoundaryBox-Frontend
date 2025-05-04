@@ -18,7 +18,7 @@ export default function Navbar() {
           <div className="hidden md:flex space-x-6">
             <a
               href="/about"
-              className="text-white hover:text-blue-400 transition font-medium"
+              className="text-white hover:text-green-600 transition font-medium"
             >
               ABOUT US
             </a>

@@ -7,6 +7,7 @@ import Signup from './components/Auth/Signup';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import RankingDisplay from './pages/RankingPage';
+import RankingPage from './pages/RankingNew';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<AboutPage/>} />
         <Route path="/scoreboard/:slug" element={<ScorecardPage />} />
-        <Route path='/ranking' element={<RankingDisplay/>} />
+        <Route path='/ranking' element={<RankingPage/>} />
       </Routes>
     </Router>
   );

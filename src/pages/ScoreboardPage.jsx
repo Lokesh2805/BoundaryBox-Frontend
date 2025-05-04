@@ -3,12 +3,15 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Matchinfo from "../components/Matchinfo";
 import Scorecard from "../components/Scorecard";
+import { useMatchInfo } from "../context/MatchInfoContext";
 
 export default function ScoreboardPage() {
   const { slug } = useParams(); // e.g. blb-vs-mw
   const [scorecardData, setScorecardData] = useState(null);
   const [activeTab, setActiveTab] = useState("info"); // 'info' | 'scorecard'
-  const [matchInfo, setMatchInfo] = useState(null);
+  //const [matchInfo, setMatchInfo] = useState(null);
+  const { matchInfo } = useMatchInfo();
+  console.log(matchInfo);
 
   // Fetch match info (always on mount)
   useEffect(() => {

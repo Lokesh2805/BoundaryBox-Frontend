@@ -24,19 +24,12 @@ const Footer = () => {
       <hr className="border-t border-gray-300 my-6" />
 
       {/* Info and links */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-center md:text-left">
-        {/* Left links */}
-        <div className="space-y-1">
-          <p>• Search</p>
-          <p>• Refund Policy</p>
-          <p>• Privacy Policy</p>
-          <p>• Terms of Service</p>
-        </div>
-
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-center md:text-left">
+       
         {/* Contact Info */}
         <div className="space-y-1">
-          <p>Email: partnership@telemedic.org</p>
-          <p>Phone: 9876543210</p>
+          <p>Email: partnership@boundarybox.org</p>
+          <p>Phone: 9911XXXXXX</p>
         </div>
 
         {/* Social & Copyright */}

@@ -1,0 +1,73 @@
+.cricket-loader {
+  position: relative;
+  width: 180px;
+  height: 120px;
+  margin: 100px auto;
+}
+
+/* Ball */
+.ball {
+  width: 18px;
+  height: 18px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+/* Stumps & Bails */
+.stumps {
+  position: absolute;
+  bottom: 0;
+  left: 130px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.stump {
+  width: 6px;
+  height: 50px;
+  background: #666;
+  border-radius: 1px;
+}
+
+/* Bails */
+.bail {
+  width: 10px;
+  height: 4px;
+  background: #999;
+  position: absolute;
+  top: -6px;
+  transition: transform 0.3s ease;
+}
+
+.bail-left {
+  left: 0;
+  animation: bailLeft 1s ease-in-out infinite;
+}
+
+.bail-right {
+  right: 0;
+  animation: bailRight 1s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes bounce {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(60px) translateY(-50px); }
+  100% { transform: translateX(110px) translateY(0); }
+}
+
+@keyframes bailLeft {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  50% { transform: translate(-10px, -15px) rotate(-30deg); }
+}
+
+@keyframes bailRight {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  50% { transform: translate(10px, -15px) rotate(30deg); }
+}
