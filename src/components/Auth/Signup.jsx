@@ -1,22 +1,36 @@
-import React, { useState } from "react";
-import ManWithLaptop from "../../assets/man-with-laptop.svg";
-import Logo from "../../assets/Logo.png";
-const Signup = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    username: "",
-    password: "",
-  });
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast'; // ✅ import toast
+import ManWithLaptop from '../../assets/man-with-laptop.svg';
+import Logo from '../../assets/Logo.png';
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+export default function Signup() {
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-    // Replace with actual login logic (e.g., API call)
-    alert(`Logging in with Username/Email: ${formData.username}`);
+
+    if (password !== confirm) {
+      toast.error("Passwords don't match");
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+
+    if (users.find(u => u.email === email)) {
+      toast.error('Email already exists');
+      return;
+    }
+
+    const newUser = { email, username, password };
+    localStorage.setItem('users', JSON.stringify([...users, newUser]));
+
+    toast.success('Signup successful!');
+    navigate('/login');
   };
 
   return (
@@ -50,23 +64,22 @@ const Signup = () => {
         {/* Vertical White Line */}
         <div className="hidden md:block w-px bg-white mx-6 h-[80%] self-center"></div>
 
-        {/* Right Side Login Form */}
+        {/* Right Side Signup Form */}
         <div className="flex flex-col justify-center items-center text-white px-8 py-6">
           <img src={Logo} alt="Logo" className="w-32 h-full" />
           <h2 className="text-4xl font-bold mb-2 text-center">
-            Hello! Sign-up to get started...{" "}
+            Hello! Sign-up to get started...
           </h2>
 
           <form
-            onSubmit={handleLogin}
+            onSubmit={handleSignup}
             className="w-full max-w-sm flex flex-col gap-4 mt-4"
           >
             <input
               type="text"
               name="username"
               placeholder="Enter your username"
-              value={formData.username}
-              onChange={handleChange}
+              onChange={e => setUsername(e.target.value)}
               className="px-4 py-2 rounded-lg border border-white bg-transparent text-white placeholder-white focus:outline-none"
               required
             />
@@ -74,8 +87,7 @@ const Signup = () => {
               type="email"
               name="email"
               placeholder="Enter your e-mail id"
-              value={formData.email}
-              onChange={handleChange}
+              onChange={e => setEmail(e.target.value)}
               className="px-4 py-2 rounded-lg border border-white bg-transparent text-white placeholder-white focus:outline-none"
               required
             />
@@ -83,17 +95,15 @@ const Signup = () => {
               type="password"
               name="password"
               placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
+              onChange={e => setPassword(e.target.value)}
               className="px-4 py-2 rounded-lg border border-white bg-transparent text-white placeholder-white focus:outline-none"
               required
             />
             <input
               type="password"
-              name="password"
+              name="confirm"
               placeholder="Confirm password"
-              value={formData.password}
-              onChange={handleChange}
+              onChange={e => setConfirm(e.target.value)}
               className="px-4 py-2 rounded-lg border border-white bg-transparent text-white placeholder-white focus:outline-none"
               required
             />
@@ -105,33 +115,9 @@ const Signup = () => {
             </button>
           </form>
 
-          {/*<div className="flex items-center my-4 w-full max-w-sm">
-            <hr className="flex-grow border-white" />
-            <span className="mx-2 text-white">Or Signup with</span>
-            <hr className="flex-grow border-white" />
-          </div>
-
-          <div className="flex gap-4">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-              alt="Google"
-              className="w-10 cursor-pointer"
-            />
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-              alt="Facebook"
-              className="w-10 cursor-pointer"
-            />
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
-              alt="Apple"
-              className="w-10 cursor-pointer"
-            />
-          </div> */}
-
           <a href="/login">
             <p className="mt-6 text-white">
-              Already have an account?{" "}
+              Already have an account?{' '}
               <span className="text-orange-300 cursor-pointer">Login</span>
             </p>
           </a>
@@ -139,6 +125,4 @@ const Signup = () => {
       </div>
     </div>
   );
-};
-
-export default Signup;
+}

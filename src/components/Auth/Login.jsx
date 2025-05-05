@@ -1,20 +1,31 @@
-import React, { useState } from "react";
-import ManWithLaptop from "../../assets/man-with-laptop.svg";
-import Logo from "../../assets/Logo.png";
-const Login = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/authSlice';
+import { useNavigate } from 'react-router-dom';
+import ManWithLaptop from '../../assets/man-with-laptop.svg'
+import Logo from '../../assets/Logo.png'
+import { toast } from 'react-hot-toast';
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
-    e.preventDefault();
-    // Replace with actual login logic (e.g., API call)
-    alert(`Logging in with Username/Email: ${formData.username}`);
+    e.preventDefault(); // prevent form refresh
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(u => u.email === email && u.password === password);
+    
+    if (user) {
+      dispatch(login(user));
+      toast.success('Login successful!');
+      navigate('/');
+    } else {
+      toast.error('Invalid email or password');
+    }
   };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden font-dosis">
       <style>{`
@@ -58,11 +69,10 @@ const Login = () => {
             className="w-full max-w-sm flex flex-col gap-4 mt-4"
           >
             <input
-              type="text"
-              name="username"
-              placeholder="Enter your username or e-mail id"
-              value={formData.username}
-              onChange={handleChange}
+              type="email"
+              name="email"
+              placeholder="Enter your e-mail id"
+              onChange={e => setEmail(e.target.value)} 
               className="px-4 py-2 rounded-lg border border-white bg-transparent text-white placeholder-white focus:outline-none"
               required
             />
@@ -70,13 +80,13 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
+              onChange={e => setPassword(e.target.value)}
               className="px-4 py-2 rounded-lg border border-white bg-transparent text-white placeholder-white focus:outline-none"
               required
             />
             <button
               type="submit"
+             
               className="bg-white text-black font-bold py-2 rounded-lg hover:bg-gray-300"
             >
               LOG-IN
@@ -118,5 +128,3 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;

@@ -1,9 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Logo from "../assets/Logo.png";
 import { FaUser } from "react-icons/fa";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(true); // Change to false to test unauth view
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  useEffect(() => {
+    // Check if user is logged in from localStorage
+    const user = localStorage.getItem("loggedInUser");
+    setIsSignedIn(!!user); // true if user exists
+  }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("loggedInUser");
+    setIsSignedIn(false);
+    setShowDropdown(false);
+    window.location.href = "/"; // redirect to homepage
+  };
+
 
   return (
     <nav className="bg-black bg-opacity-80 backdrop-blur-md fixed w-full z-20 shadow-md font-josefin">
@@ -16,7 +31,7 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6">
-          <a
+            <a
               href="/"
               className="text-white hover:text-blue-400 transition font-medium"
             >
@@ -28,12 +43,11 @@ export default function Navbar() {
             >
               ABOUT US
             </a>
-            
             <a
               href="/fantasymatches"
               className="text-white hover:text-blue-400 transition font-medium"
             >
-            FANTASY MATCHES
+              FANTASY MATCHES
             </a>
           </div>
 
@@ -41,11 +55,20 @@ export default function Navbar() {
           <div className="hidden md:flex items-center">
             {isSignedIn ? (
               <div className="relative">
-                <a href="/">
-                  <FaUser 
-                    className="h-10 w-10 rounded-full border-2 border-blue-500 hover:scale-105 transition text-white p-1"
-                  />
-                </a>
+                <button onClick={() => setShowDropdown(!showDropdown)}
+                className="focus:outline-none">
+                  <FaUser className="h-10 w-10 rounded-full border-2 border-blue-500 hover:scale-105 transition text-white p-1" />
+                </button>
+                {showDropdown && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg z-50">
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <a
@@ -101,25 +124,22 @@ export default function Navbar() {
               ABOUT US
             </a>
             <a
-              href="#"
+              href="/fantasymatches"
               className="block text-white hover:text-blue-400 text-base font-medium"
             >
               FANTASY MATCHES
             </a>
             <a
-              href="#"
+              href="/ranking"
               className="block text-white hover:text-blue-400 text-base font-medium"
             >
               RANKING
             </a>
 
-            {/* Conditional rendering for mobile */}
             {isSignedIn ? (
               <a href="/">
-                  <FaUser 
-                    className="h-10 w-10 rounded-full border-2 border-blue-500 hover:scale-105 transition text-white p-1"
-                  />
-                </a>
+                <FaUser className="h-10 w-10 rounded-full border-2 border-blue-500 hover:scale-105 transition text-white p-1" />
+              </a>
             ) : (
               <a
                 href="/login"

@@ -1,42 +1,27 @@
+// redux/authSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  user: JSON.parse(localStorage.getItem('user')) || null,
-  isAuthenticated: !!localStorage.getItem('user'),
-};
+const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: {
+    isAuthenticated: !!storedUser,
+    user: storedUser || null,
+  },
   reducers: {
-    signup: (state, action) => {
-      const { username, email, password } = action.payload;
-      const newUser = { username, email, password };
-      localStorage.setItem('user', JSON.stringify(newUser));
-      state.user = newUser;
-      state.isAuthenticated = true;
-    },
     login: (state, action) => {
-      const { email, password } = action.payload;
-      const storedUser = JSON.parse(localStorage.getItem('user'));
-      if (
-        storedUser &&
-        storedUser.email === email &&
-        storedUser.password === password
-      ) {
-        state.user = storedUser;
-        state.isAuthenticated = true;
-      } else {
-        alert('Invalid credentials');
-      }
+      state.isAuthenticated = true;
+      state.user = action.payload;
+      localStorage.setItem('loggedInUser', JSON.stringify(action.payload));
     },
     logout: (state) => {
-      localStorage.removeItem('user');
-      state.user = null;
       state.isAuthenticated = false;
+      state.user = null;
+      localStorage.removeItem('loggedInUser');
     },
   },
 });
 
-export const { signup, login, logout } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 export default authSlice.reducer;

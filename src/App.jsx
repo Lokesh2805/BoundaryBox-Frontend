@@ -13,21 +13,45 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import RankingDisplay from "./pages/RankingPage";
 import FantasyMachesDisplay from "./pages/FantasyMachesDisplay";
-
+import PrivateRoute from "./components/Auth/PrivateRoute";
+import {Toaster} from 'react-hot-toast'
 function App() {
   return (
-    <Router>
+    <> <Toaster
+    position="bottom-right"
+    toastOptions={{
+      success: {
+        style: {
+          background: '#4ade80',
+          color: 'black',
+          fontWeight: 'bold',
+        },
+      },
+      error: {
+        style: {
+          background: '#f87171',
+          color: 'black',
+          fontWeight: 'bold',
+        },
+      },
+    }}
+  />
+  
+   <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/scoreboard/:slug" element={<ScorecardPage />} />
-        <Route path="/fantasymatches" element={<FantasyMachesDisplay />} />
-        <Route path="/ranking/:slug" element={<RankingDisplay />} />
+        <Route path="/scoreboard/:slug" element={<PrivateRoute><ScorecardPage /></PrivateRoute>} />
+        <Route path="/fantasymatches" element={<PrivateRoute><FantasyMachesDisplay /></PrivateRoute>} />
+        <Route path="/ranking/:slug" element={<PrivateRoute><RankingDisplay /></PrivateRoute>} />
       </Routes>
     </Router>
+  
+  </>
+   
   );
 }
 
