@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Trophy, Clock9 } from "lucide-react";
 import CricketLoader from "../components/Loader/CricketLoader";
+import { useNavigate } from "react-router-dom";
 
-export default function RankingPage() {
+export default function FantasyMachesDisplay() {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const getSlugFromLink = (url) => {
+    const parts = url.split("/");
+    const slug = parts.find((part) => part.includes("-vs-"));
+    return slug || "match";
+  };
 
   useEffect(() => {
     const fetchUpcomingMatches = async () => {
@@ -48,13 +55,16 @@ export default function RankingPage() {
       </div>
 
       {loading ? (
-        <div className="flex flex-col items-center justify-center "><CricketLoader/>
-        <span className="text-lg text-blue-700 font-semibold">
-        Loading Fantasy Matches...
-      </span>
+        <div className="flex flex-col items-center justify-center ">
+          <CricketLoader />
+          <span className="text-lg text-blue-700 font-semibold">
+            Loading Fantasy Matches...
+          </span>
         </div>
       ) : matches.length === 0 ? (
-        <div className="text-center text-gray-600">No upcoming matches available.</div>
+        <div className="text-center text-gray-600">
+          No upcoming matches available.
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-2 md:px-10">
           {matches.map((match, idx) => (
@@ -62,18 +72,24 @@ export default function RankingPage() {
               key={idx}
               className="bg-white rounded-2xl shadow-lg border-t-4 border-blue-600 transition transform hover:-translate-y-1 hover:shadow-xl p-6"
             >
-              <h2 className="text-xl font-bold text-blue-800 mb-2">{match.title}</h2>
+              <h2 className="text-xl font-bold text-blue-800 mb-2">
+                {match.title}
+              </h2>
               <div className="flex items-center text-gray-600 text-sm mb-4">
                 <Clock9 className="w-4 h-4 mr-2 text-blue-500" />
                 <span>Toss Time: {match.toss_time}</span>
               </div>
+
               <a
-                href={match.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={() => {
+                  const slug = getSlugFromLink(match.link);
+                  navigate(
+                    `/ranking/${slug}?link=${encodeURIComponent(match.link)}`
+                  );
+                }}
                 className="inline-block mt-auto px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition text-sm font-medium"
               >
-                View Match Insights
+                View Player Rankings
               </a>
             </div>
           ))}

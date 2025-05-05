@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Logo from "../assets/Logo.png";
-
+import { FaUser } from "react-icons/fa";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(false); // Change to false to test unauth view
+  const [isSignedIn, setIsSignedIn] = useState(true); // Change to false to test unauth view
 
   return (
     <nav className="bg-black bg-opacity-80 backdrop-blur-md fixed w-full z-20 shadow-md font-josefin">
@@ -16,23 +16,24 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6">
+          <a
+              href="/"
+              className="text-white hover:text-blue-400 transition font-medium"
+            >
+              HOME
+            </a>
             <a
               href="/about"
               className="text-white hover:text-green-600 transition font-medium"
             >
               ABOUT US
             </a>
+            
             <a
-              href="#"
+              href="/fantasymatches"
               className="text-white hover:text-blue-400 transition font-medium"
             >
-              FANTASY MATCHES
-            </a>
-            <a
-              href="/ranking"
-              className="text-white hover:text-blue-400 transition font-medium"
-            >
-              RANKING
+            FANTASY MATCHES
             </a>
           </div>
 
@@ -40,11 +41,9 @@ export default function Navbar() {
           <div className="hidden md:flex items-center">
             {isSignedIn ? (
               <div className="relative">
-                <a href="/profile">
-                  <img
-                    src="https://i.pravatar.cc/150?img=56"
-                    alt="Avatar"
-                    className="h-10 w-10 rounded-full border-2 border-blue-500 hover:scale-105 transition"
+                <a href="/">
+                  <FaUser 
+                    className="h-10 w-10 rounded-full border-2 border-blue-500 hover:scale-105 transition text-white p-1"
                   />
                 </a>
               </div>
@@ -116,17 +115,11 @@ export default function Navbar() {
 
             {/* Conditional rendering for mobile */}
             {isSignedIn ? (
-              <a
-                href="/profile"
-                className="block text-white font-medium  items-center space-x-2"
-              >
-                <img
-                  src="https://i.pravatar.cc/150?img=56"
-                  alt="Avatar"
-                  className="h-8 w-8 rounded-full border border-white"
-                />
-                <span>Profile</span>
-              </a>
+              <a href="/">
+                  <FaUser 
+                    className="h-10 w-10 rounded-full border-2 border-blue-500 hover:scale-105 transition text-white p-1"
+                  />
+                </a>
             ) : (
               <a
                 href="/login"
